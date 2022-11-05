@@ -1,36 +1,42 @@
 body{
     background-color: #231F20;
     overflow: hidden;
+    font-family: "josefin sans";
+    color:white;
+    -webkit-user-select: none; user-select: none; 
+    font-size: 2.2vh;
 }
+
+a, a:visited, a:hover, a:active{ color: white; }
 
 .step, .halfstep, .boom, .link, #zero{
     box-sizing: border-box; 
-    width:100px; 
-    height: 100px;
-    top: 10;
-    left: 10;
+    width:14vh; 
+    aspect-ratio: 1;
+    top: 8vh;
+    left: 8vh;
     position:absolute;
-    border-radius: 50px;
+    border-radius: 50%;
     border-style: solid;
-    border-width: 8px;
+    border-width: 1vh;
     text-align: center;
-    font-family: "josefin sans";
-    padding-top: 20px;
-    color: white;
-    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
 }
 
-.step{
+.step, .pathA, .blue{
     background-color: #241A6B;
     border-color: #4345B5;
 }
 
-.halfstep{
+.halfstep, .pathB, .purple{
     background-color: #3E1A6B;
     border-color: #6643B5;
 }
 
-.boom{
+.boom, .pathC, .green{
     background-color: #1A5E6B;
     border-color: #43B5AC;
 }
@@ -43,33 +49,10 @@ body{
 #zero{ z-index: 5; }
 
 #zero:hover, .link:hover{
-    top:4px;
-    left:4px;
-    width:112px;
-    height:112px;
-    border-width: 14px;
-    border-radius:62px;
-}
-
-.pathA, .blue{
-    background-color: #241A6B;
-    border-color: #4345B5;
-}
-
-.pathB, .purple{
-    background-color: #3E1A6B;
-    border-color: #6643B5;
-}
-
-.pathC, .green{
-    background-color: #1A5E6B;
-    border-color: #43B5AC;
-}
-
-.long{ 
-    white-space: nowrap;
-    overflow:visible;
-    padding-top: 10px;
+    aspect-ratio: 1;
+    width: 15vh;
+    border-width: 2vh;
+    border-radius: 50%;
 }
 
 .vis{ visibility: visible; }
@@ -79,7 +62,6 @@ body{
 #canv{ z-index: -3; }
 
 #rules{
-    font-family: "josefin sans";
     z-index: -1;
     top: 40px;
     left:150px;
@@ -88,7 +70,6 @@ body{
 }
 
 #copyright{
-    color:white;
-    font-family: "josefin sans";
     position:absolute;
+    bottom: 2vh;
 }

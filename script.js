@@ -1,7 +1,7 @@
 var canv = document.getElementById("canv");
 var ctx = canv.getContext("2d");
 
-var zero = document.getElementById("zero"); //ALL 20 STEPS OF PATH A NOT INCLUDING ART
+var zero = document.getElementById("zero"); //path a
 var A1 = document.getElementById("A1");
 var A1_1 = document.getElementById("A1.1");
 var A2 = document.getElementById("A2");
@@ -22,173 +22,117 @@ var A11 = document.getElementById("A11");
 var A12 = document.getElementById("A12");
 var A13 = document.getElementById("A13");
 
-var B1 = document.getElementById("B1"); //ALL 5 STEPS OF PATH B NOT INCLUDING ART
+var B1 = document.getElementById("B1"); //path b
 var B2 = document.getElementById("B2");
 var B3 = document.getElementById("B3");
 var B4 = document.getElementById("B4");
 var B5 = document.getElementById("B5");
 
-var C1 = document.getElementById("C1"); //PATH C LOL
+var C1 = document.getElementById("C1"); //path c lol
 
-var M1 = document.getElementById("M1"); //ALL MANIFESTO STAEMENTS
+var M1 = document.getElementById("M1"); //manifesto staements
 var M2 = document.getElementById("M2");
 var M3 = document.getElementById("M3");
 var M4 = document.getElementById("M4");
 
-var Z1 = document.getElementById("Z1"); //ALL ART RESULTS
+var Z1 = document.getElementById("Z1"); //art results
 var Z2 = document.getElementById("Z2");
 var Z3 = document.getElementById("Z3");
 var Z4 = document.getElementById("Z4");
 
+var Alist = [ A1, A1_1, A2, A2_1, M2, A3, A4, A4_1, A4_2, A4_3, A5, A6, A7, M3, A8, Z3, A9, A10, A10_1, M4, A11, A12, A13, Z4 ];
+var Blist = [ B1, B2, B3, Z1, B4, M1, B5, Z2 ];
+
 var thisbox = zero;
 var lastbox = zero;
 
-function canvsize(){    //RESIZES CANVAS TO WINDOW
+function canvsize(){ //resizes canvas to window
   ctx.canvas.width = window.innerWidth;
   ctx.canvas.height = window.innerHeight; 
 }
 
-function isinvis(thing){    //CHECKS IF INPUTTED THING IS INVISIBLE
+function isinvis(thing){ //checks if inputted thing isinvisible
   return thing.classList.contains("invis")
 }
 
-function reveal(thing){   //REVEALS INPUTTED THING
-  thing.classList.remove("invis");
-  thing.classList.add("vis");
+function reveal(thing){ //reveals inputted thing
+  thing.classList.replace("invis", "vis");
   thisbox = thing;
 }
 
-function place(event){
+function place(event){ //picks a step
   
-  var x = event.clientX; //POSITION OF THE MOUSECLICK
+  var x = event.clientX; //position of mouseclick
   var y = event.clientY;
 
-  if(x < 120 && y < 120 == true){ //IF U CLICKED BOX ZERO DO NOTHING
+  if(x < 120 && y < 120 == true){ //if u clicked box zero do nothing
     return;
   }else{
 
-    if(zero.classList.contains("pathA") == true){ //REVEALS PATH A IN ORDER
-      if(isinvis(A1) == true){
-        reveal(A1);
-        lastbox = zero;
-      }else if (isinvis(A1_1) == true){
-        reveal(A1_1)
-        lastbox = A1;
-      }else if (isinvis(A2) == true){
-        reveal(A2);
-      }else if (isinvis(A2_1) == true){
-        reveal(A2_1);
-        lastbox = A2;
-      }else if (isinvis(M2) == true){
-        reveal(M2);
-      }else if (isinvis(A3) == true){
-        reveal(A3);
-      }else if (isinvis(A4) == true){
-        reveal(A4);
-        lastbox = A3;
-      }else if (isinvis(A4_1) == true){
-        reveal(A4_1);
-        lastbox = A4;
-      }else if (isinvis(A4_2) == true){
-        reveal(A4_2);
-      }else if (isinvis(A4_3) == true){
-        reveal(A4_3);
-      }else if (isinvis(A5) == true){
-        reveal(A5);
-        lastbox = A4;
-      }else if (isinvis(A6) == true){
-        reveal(A6);
-        lastbox = A5;
-      }else if (isinvis(A7) == true){
-        reveal(A7);
-        lastbox = A6;
-      }else if (isinvis(M3) == true){
-        reveal(M3);
-      }else if (isinvis(A8) == true){
-        reveal(A8);
-        lastbox = A7;
-      }else if (isinvis(Z3) == true){
-        reveal(Z3);
-        lastbox = A8;
-      }else if (isinvis(A9) == true){
-        reveal(A9);
-      }else if (isinvis(A10) == true){
-        reveal(A10);
-        lastbox = A9;
-      }else if (isinvis(A10_1) == true){
-        reveal(A10_1);
-      }else if (isinvis(M4) == true){
-        reveal(M4);
-      }else if (isinvis(A11) == true){
-        reveal(A11);
-        lastbox = A10;
-      }else if (isinvis(A12) == true){
-        reveal(A12);
-        lastbox = A11;
-      }else if (isinvis(A13) == true){
-        reveal(A13);
-        lastbox = A12;
-      }else if (isinvis(Z4) == true){
-        reveal(Z4);
-        lastbox = A13;
+    if(zero.classList.contains("pathA") == true){ //reveals path a in order
+
+      for( i=0; i < Alist.length; i++){
+
+        if (isinvis(Alist[i]) == true){
+          lastbox = thisbox;
+          reveal(Alist[i]);
+          drawline(event);
+          return; 
+        }
       }
-    }else if(zero.classList.contains("pathB") == true){ //REVEALS PATH B IN ORDER
-      if(isinvis(B1) == true){
-        reveal(B1);
-        lastbox = zero;
-      }else if(isinvis(B2) == true){
-        reveal(B2);
-        lastbox = B1;
-      }else if(isinvis(B3) == true){
-        reveal(B3);
-        lastbox = B2;
-      }else if(isinvis(Z1) == true){
-        reveal(Z1);
-        lastbox = B3;
-      }else if(isinvis(B4) == true){
-        reveal(B4);
-      }else if(isinvis(M1) == true){
-        reveal(M1);
-        lastbox = B4;
-      }else if(isinvis(B5) == true){
-        reveal(B5);
-      }else if(isinvis(Z2) == true){
-        reveal(Z2);
-        lastbox = B5;
+
+    }else if(zero.classList.contains("pathB") == true){ //reveals path b in order
+
+      for( i=0; i < Blist.length; i++){
+
+        if (isinvis(Blist[i]) == true){
+          lastbox = thisbox;
+          reveal(Blist[i]);
+          drawline(event);
+          return;
+        }
       }
-    }else if(zero.classList.contains("pathC") == true){ //REVEALS PATHC LOL
+
+    }else if(zero.classList.contains("pathC") == true){ //reveals path c lol
       if(isinvis(C1) == true){
         reveal(C1);
+        drawline(event);
       }
     }
 
-    // DRAWS LINES AND DETERMINES POSITION OF BOX
-    thisbox.style.top = y - 50; //PLACING THISBOX AT THE MOUSECLICK
-    thisbox.style.left = x - 50;
-
-    var lastboxx = lastbox.style.left; //DEFINING LAST BOX POSITION
-    var lastboxy = lastbox.style.top;
-
-    //LINE STYLE
-    ctx.strokeStyle = "#97B2F0";
-    ctx.lineWidth = 4;
-
-    if (thisbox.classList.contains("halfstep") == true || thisbox.classList.contains("boom") == true){
-      return; //HALF STEP OR BOOM DO NOTHING
-    }else{
-      if(lastbox.id == "zero"){ //FIRST CLICK START POINT IS BOX ZERO
-        ctx.beginPath();
-        ctx.moveTo(50,50);
-      }else{ 
-        ctx.moveTo(lastboxx, lastboxy); //DRAW THE LINE FROM LAST BOX--
-      }
-      ctx.lineTo(x, y); //--TO CURRENT MOUSECLICK
-      ctx.stroke();
-    }
   }
 }
 
-const S1 = document.getElementById("S1");
+function drawline(event){ //draws lines on canvas
+
+  var x = event.clientX; //position of the mouseclick
+  var y = event.clientY;
+
+  thisbox.style.top = y; //placing thisbox at mouseclick
+  thisbox.style.left = x;
+
+  var lastboxx = lastbox.style.left; //sets lastbox position
+  var lastboxy = lastbox.style.top;
+
+  ctx.strokeStyle = "#97B2F0"; //line style
+  ctx.lineWidth = 4;
+
+  if (thisbox.classList.contains("halfstep") == true || thisbox.classList.contains("boom") == true){ //do not draw lines on a halfstep or art or manifesto
+    return; 
+  }else{
+    if(lastbox.id == "zero"){ //first click start point is box zero
+      ctx.beginPath();
+      ctx.moveTo(50,50);
+    }else{ 
+      ctx.moveTo(lastboxx, lastboxy); //draw the line from lastbox...
+    }
+    ctx.lineTo(x, y); //to current mouseclick
+    ctx.stroke(); 
+    
+  } 
+}
+
+const S1 = document.getElementById("S1"); //sounds
 const S2 = document.getElementById("S2");
 const S3 = document.getElementById("S3");
 const S4 = document.getElementById("S4");
@@ -199,41 +143,37 @@ const S8 = document.getElementById("S8");
 
 const sounds = [S1, S2, S3, S4, S5, S6, S7, S8];
 
-function ding(){
+function ding(){ //dings
 
-  var pos = Math.floor(Math.random() * 9);
+  var pos = Math.floor(Math.random() * 8);
   var ding = sounds[pos];
-
   ding.play();
 }
 
-function erase(){
+function erase(){ //clears canvas
 
   var boxes = document.querySelectorAll(".vis");
   Array.from(boxes);
+  boxes.forEach(box => box.classList.replace("vis", "invis"));
 
-  boxes.forEach(box => box.classList.remove("vis"));
-  boxes.forEach(box => box.classList.add("invis"));
-
+  ctx.closePath();  
+  lastbox = zero;
+  thisbox = zero;
   ctx.clearRect(0, 0, canv.width, canv.height);
 
-  if(zero.classList.contains("pathA") == true){
-    zero.classList.remove("pathA");
-    zero.classList.add("pathB");
-    zero.innerHTML = "HOW TO<br>MAKE ART?<br>(HOME)";
+  if(zero.classList.contains("pathA") == true){ //swap paths
+
+    zero.classList.replace("pathA", "pathB");
+    zero.innerHTML = "HOW TO MAKE ART? (HOME)";
+
   }else if(zero.classList.contains("pathB") == true){
-    zero.classList.remove("pathB");
-    zero.classList.add("pathC");
-    zero.innerHTML = "HOW TO<br>MAKE ART?<br>(WORK)";
+    
+    zero.classList.replace("pathB", "pathC");
+    zero.innerHTML = "HOW TO MAKE ART? (WORK)";
+
   }else if(zero.classList.contains("pathC") == true){
-    zero.classList.remove("pathC");
-    zero.classList.add("pathA");
-    zero.innerHTML = "HOW TO<br>MAKE ART?<br>(SCHOOL)";
+
+    zero.classList.replace("pathC", "pathA");
+    zero.innerHTML = "HOW TO MAKE ART? (SCHOOL)";
   }
-
-}
-
-function cpyrt(){
-  var bruhg = window.innerHeight;
-  document.getElementById("copyright").style.top = bruhg - 30;
 }
